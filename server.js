@@ -106,11 +106,11 @@ const books = [
     },
     {
         id: 9,
-        title: "Dragon Ball Super Vol. 2",
+        title: "Dragon Ball Super Vol. 3",
         author: "Akira Toriyama",
         price: 49.90,
-        image: "/fotos/dbz2.jpg",
-        images: ["/fotos/dbz2.jpg"],
+        image: "/fotos/dbz3.jpg",
+        images: ["/fotos/dbz3.jpg",],
         description: "Continuação da série com novos desafios intergalácticos e batalhas épicas.",
         category: "manga"
     },
