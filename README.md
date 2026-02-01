@@ -1,22 +1,44 @@
-# Integração PIX com Mercado Pago (exemplo)
+# 📚 Biblioteca TCC
 
-Este exemplo adiciona um backend simples em Node/Express que cria cobranças PIX usando a API do Mercado Pago e retorna o `qr_code` e `qr_code_base64` para o front-end.
+Projeto de Trabalho de Conclusão de Curso - Sistema de Biblioteca Digital
 
-## Passos para rodar localmente
-1. Clone / abra esta pasta (`loja`).
-2. Copie `.env.example` para `.env` e coloque seu `MP_ACCESS_TOKEN` (sandbox ou produção).
-3. Rode:
-   - `npm install`
-   - `npm start` (ou `npm run dev` com `nodemon`)
-4. Abra `http://localhost:3000/`.
+## 📋 Descrição
+Este projeto é uma plataforma de biblioteca digital desenvolvida como TCC, permitindo que usuários façam login, naveguem por um catálogo de livros, visualizem detalhes e gerenciem suas leituras.
 
-## Como testar
-- Clique em "Comprar" em um item — o front chamará `/api/create-pix` e mostrará o QR (imagem ou gerado pelo JS) e a string (payload) para copiar.
-- Use o sandbox do Mercado Pago para testar pagamentos.
+## 🏗️ Estrutura do Projeto
+```
+├── inicial/          # Página inicial da aplicação
+├── Login/            # Sistema de autenticação
+├── biblioteca/       # Catálogo principal da biblioteca
+├── dadoslivros/      # Detalhes dos livros
+├── leitura/          # Interface de leitura
+├── loja/             # Seção de compra/vendas
+├── fotos/            # Imagens e recursos
+├── api/              # APIs e dados
+└── README.md         # Este arquivo
+```
 
-## Observações de segurança
-- Mantenha `MP_ACCESS_TOKEN` no servidor (não exponha no front-end).
-- Valide webhooks e assinaturas conforme a documentação do PSP em produção.
+## 🚀 Como rodar
+1. Clone ou baixe este repositório
+2. Abra `inicial/i.html` no navegador para acessar a página inicial
+3. Navegue pelas diferentes seções da plataforma
 
-## Referências
-- Mercado Pago: https://www.mercadopago.com.br/developers/pt
+## ✨ Funcionalidades
+- 🔐 Sistema de Login e Autenticação
+- 📖 Catálogo de Livros
+- 👁️ Visualização de Detalhes do Livro
+- 📕 Modo de Leitura
+- 🛒 Seção de Loja
+
+## 🛠️ Tecnologias Utilizadas
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
+- Node.js (Backend - na pasta `loja`)
+
+## 👨‍💻 Autor
+Desenvolvido como Trabalho de Conclusão de Curso
+
+---
+
+**Última atualização:** Fevereiro de 2026
