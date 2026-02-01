@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraria</title>
+    <link rel="stylesheet" href="dadoslivro.css">
+</head>
+<body>
+    <!-- TOPO -->
+    <header class="page-top">
+        <div class="top-strip"></div>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-left">
+                    <a href="#" class="brand">
+                        <img src="/fotos/logo.png" alt="Logo da Livraria" class="brand-img"> 
+                    </a>
+                    <ul class="nav-links">
+                        <li><a href="/inicial/i.html">Início</a></li>
+                        <li><a href="/loja/lojaindex.html">Loja</a></li>
+                        <li><a href="/biblioteca/bibliotecaindex.html">Biblioteca</a></li>
+                        <li><a href="#">Dinheiro</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="page">
+        <div class="book-container">
+
+            <!-- CAPA -->
+            <div class="book-cover">
+                <img src="/fotos/dbz1.jpg" alt="Capa do livro Dragon Ball Super Vol. 1">
+            </div>
+
+            <!-- INFORMAÇÕES -->
+            <section class="book-info">
+                <h1>Dragon Ball Super - Vol. 1</h1>
+
+                <!-- Média Global -->
+                <div class="rating-average">
+                    <div class="stars">
+                        <span class="star full">★</span>
+                        <span class="star full">★</span>
+                        <span class="star full">★</span>
+                        <span class="star full">★</span>
+                        <span class="star half">★</span>
+                    </div>
+                    <span class="rating-text">4,5 de 5 (3.566 avaliações)</span>
+                </div>
+
+                <!-- Avaliação do Usuário -->
+                <div class="rating-system">
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
+                </div>
+                <p id="rating-result">Sua avaliação: 0 estrelas</p>
+
+                <p class="description">
+                    Alguns meses se passaram desde a grande luta entre Goku e Majin Boo. 
+                    Mas uma nova ameaça vem para acabar com a paz. Parece que o próximo inimigo 
+                    vem do Sexto Universo e nossos heróis mal podem esperar para enfrentá-lo e testar sua força. 
+                    A aclamada série de Akira Toriyama finalmente tem a sua continuação.
+                </p>
+            </section>
+
+            <!-- CARD LATERAL -->
+            <aside class="buy-box">
+                <div class="price">
+                    A partir de <strong>R$ 40,00</strong>
+                </div>
+
+                <button class="buy-btn">Comprar</button>
+
+                <div class="details">
+                    <p><strong>Autor:</strong> Akira Toriyama</p>
+                    <p><strong>Editora:</strong> Panini</p>
+                    <p>
+                        Akira Toriyama é um renomado mangaká japonês, mundialmente conhecido por criar 
+                        <em>Dragon Ball</em> e <em>Dr. Slump</em>.
+                    </p>
+                </div>
+
+                <div class="recommend">
+                    <h4>Clientes que compraram este item também compraram</h4>
+                    <div class="recommend-list">
+                        <a href="../LivroDados/Lindex.html">
+                            <img src="/fotos/dbz2.jpg" alt="Dragon Ball Super Vol. 2">
+                        </a>
+                        <img src="/fotos/dbz3.jpg" alt="Dragon Ball Super Vol. 3">
+                        <img src="/fotos/dbz4.jpg" alt="Dragon Ball Super Vol. 4">
+                        <img src="/fotos/dbz5.jpg" alt="Dragon Ball Super Vol. 5">
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- SCRIPT DE AVALIAÇÃO -->
+    <script>
+        const stars = document.querySelectorAll('.rating-system .star');
+        const result = document.getElementById('rating-result');
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = star.getAttribute('data-value');
+
+                stars.forEach(s => s.classList.remove('selected'));
+                for (let i = 0; i < value; i++) {
+                    stars[i].classList.add('selected');
+                }
+
+                result.textContent = `Sua avaliação: ${value} estrelas`;
+            });
+        });
+    </script>
+</body>
+</html>

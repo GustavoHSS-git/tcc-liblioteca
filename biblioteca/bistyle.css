@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap');
+body {
+    font-family: 'Inter', 'Nunito Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 79px; 
+    background-color: #007385;
+} 
+
+/* Top bar + navbar (igual à imagem) */
+.page-top { position: fixed; top: 0; left: 0; width: 100%; z-index:1100; }
+.top-strip {   width: 100%; }
+.navbar {
+  background: white;
+  border-bottom: 1px solid #EFEFEF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 75px;
+  display: block;
+/* layout interno controlado pela .container */
+}
+
+/* centraliza o conteúdo da header como na imagem */
+.container {
+  max-width: 122220px;
+  margin: 0 auto;
+  padding: 0 50px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.nav-left { display: flex; align-items: center; gap: 40px; } 
+.brand-img { width: 85px; height: 85px; object-fit: contain; display:block; }
+
+.nav-links { list-style: none; display: flex; gap: 0; align-items: center; height: 100%; } 
+.nav-links li { font-size: 16px; margin-right: 2px; } 
+.nav-links a { color: #222; text-decoration: none; padding: 8px 20px; border-radius: 6px; height: 100%; display: flex; align-items: center; transition: all 0.3s ease; }
+.nav-links a:hover { background: rgba(0, 115, 133, 0.1); color: #007385; }
+
+/* ------------------- PESQUISA ------------------- */
+
+.search-area {
+    text-align: center;
+    margin-top: 20px; /* abaixo da navbar */
+}
+
+.search-area input {
+   width: 350px;
+    padding: 12px 18px;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+
+
+/* ------------------- CARDS ------------------- */
+* { margin: 0; padding: 0 ; box-sizing: border-box; }
+
+/* Grade automática de cards: colunas fixas (responsivas) */
+.d-steam-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 280px)); /* colunas fixas de 180px que se quebram automaticamente */
+  justify-content: center; /* centraliza o bloco d  e grid na página */
+  gap: 2rem; /* espaço entre cards */
+  padding: 1rem; /* evita cortes nas bordas */
+}
+
+/* Cada wrapper ocupa totalmente a célula da grade */
+.d-steam-card-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media only screen and (max-width: 1200px) {
+  .d-steam-cards { grid-template-columns: repeat(auto-fill, minmax(150px, 150px)); }
+}
+
+@media only screen and (max-width: 768px) {
+  .d-steam-cards { grid-template-columns: repeat(auto-fill, minmax(120px, 120px)); }
+}
+
+.d-steam-card {
+  padding: 0 0 150% 0; /* Use padding 'trick' to create a ratio for the cards */
+  background: url('') no-repeat transparent 50% 50%;
+  background-size: cover;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 10px -2px rgba(0, 0, 0, 0.5);
+  transition: all 0.28s ease 0.01s;
+  transform: perspective(222px) translate3d(0px, 5px, 0px) rotateX(0deg);
+  perspective-origin: top;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.d-steam-card::before {
+  width: 100%;
+  height: 172%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  background-image: linear-gradient(35deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.07) 51.5%, rgba(255, 255, 255, 0.15) 54%, rgba(255, 255, 255, 0.15) 100%);
+  transform: translateY(-36%);
+  opacity: 0.5;
+  transition: all 0.28s ease 0.01s;
+}
+
+.d-steam-card:hover,
+.d-steam-card:focus {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transform: perspective(222px) translate3d(0px, 0px, 8px) rotateX(3deg);
+  transform-origin: center;
+  box-shadow: 0 14px 16px -2px rgba(0, 0, 0, 0.5);
+}
+
+.d-steam-card:hover::before,
+.d-steam-card:focus::before {
+  opacity: 1;
+  transform: translateY(-20%);
+}
+
+.d-steam-card:active { filter: brightness(80%) contrast(110%); }
+
+/* aninhamento expandido: */
+.b-game-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-bottom: 150%;
+  perspective: 1000px;
+}
+
+.b-game-card__cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  background-size: cover;
+  transform-style: preserve-3d;
+  transition: transform .35s ease-in-out;
+}
+
+.b-game-card:hover .b-game-card__cover {
+  transform: rotateX(7deg) translateY(-6px);
+}
+
+.b-game-card::before {
+  content: "";
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  background: rgba(0,0,0,0.5);
+  box-shadow: 0 6px 12px 12px rgba(0,0,0,0.4);
+}

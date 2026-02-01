@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - Livraria</title>
+    <!-- Link para os estilos CSS -->
+    <link rel="stylesheet" href="../loja/catalogo.css">
+</head>
+<body>
+    <!-- ============================
+         HEADER: Navegação e Logo
+         ============================ -->
+    <header class="page-top">
+        <div class="top-strip"></div>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-left">
+                    <!-- Logo da livraria -->
+                    <a href="#" class="brand">
+                        <img src="../fotos/logo.png" alt="logo" class="brand-img" />
+                    </a>
+                    <!-- Links de navegação (Início, Loja, Biblioteca) -->
+                    <ul class="nav-links">
+                        <li><a href="../inicial/i.html">Início</a></li>
+                        <li><a href="catalogo.html" class="active">Loja</a></li>
+                        <li><a href="../biblioteca/bibliotecaindex.html">Biblioteca</a></li>
+                    </ul>
+                </div>
+                <div class="nav-right">
+                    <!-- Botão carrinho com contador dinâmico -->
+                    <button class="cart-btn" id="cartBtn">
+                        🛒 Carrinho (<span id="cartCount">0</span>)
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ============================
+         SEÇÃO DE FILTROS E BUSCA
+         ============================ -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters">
+                <!-- Campo de busca por título/autor -->
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="🔍 Buscar por título ou autor..."
+                >
+                <!-- Select para ordenação -->
+                <select id="sortSelect" class="sort-select">
+                    <option value="name-asc">Nome (A-Z)</option>
+                    <option value="name-desc">Nome (Z-A)</option>
+                    <option value="price-asc">Preço (menor)</option>
+                    <option value="price-desc">Preço (maior)</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         GRID DE LIVROS
+         ============================ -->
+    <section class="books-section">
+        <div class="container">
+            <h1>Nosso Catálogo</h1>
+            <!-- Container onde os cards dos livros serão inseridos dinamicamente pelo JS -->
+            <div class="books-grid" id="booksGrid">
+                <!-- Cards serão inseridos aqui dinamicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================
+         MODAL DO CARRINHO
+         ============================ -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-content">
+            <button class="close-btn" id="closeCart">&times;</button>
+            <h2>Seu Carrinho</h2>
+            <!-- Lista de itens no carrinho (preenchida dinamicamente) -->
+            <div class="cart-items" id="cartItems">
+                <p class="empty-cart">Carrinho vazio</p>
+            </div>
+            <div class="cart-summary">
+                <!-- Valor total da compra -->
+                <div class="cart-total">
+                    <strong>Total:</strong>
+                    <span id="cartTotal">R$ 0,00</span>
+                </div>
+                <!-- Botão para ir ao checkout -->
+                <button class="checkout-btn" id="checkoutBtn">Ir para Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================
+         MODAL DE DETALHES DO LIVRO
+         ============================ -->
+    <div class="detail-modal" id="detailModal">
+        <div class="detail-modal-content">
+            <button class="close-btn" id="closeDetail">&times;</button>
+            <div class="detail-container">
+                <!-- Coluna esquerda: imagem e galeria de miniaturas -->
+                <div class="detail-image">
+                    <!-- Imagem principal do livro -->
+                    <img id="detailImg" src="" alt="Livro">
+                    <!-- Miniaturas/galeria (preenchidas via JS) -->
+                    <div id="detailThumbs" class="detail-thumbs" aria-label="Miniaturas">
+                        <!-- miniaturas preenchidas via JS -->
+                    </div>
+                </div>
+                <!-- Coluna direita: informações do livro -->
+                <div class="detail-info">
+                    <!-- Título, autor, descrição, preço -->
+                    <h2 id="detailTitle"></h2>
+                    <p class="detail-author" id="detailAuthor"></p>
+                    <p class="detail-description" id="detailDescription"></p>
+                    <div class="detail-price">
+                        <span class="price" id="detailPrice"></span>
+                    </div>
+                    <!-- Botão para adicionar ao carrinho -->
+                    <button class="add-cart-btn" id="addCartBtn">Adicionar ao Carrinho</button>
+                    
+                    <!-- Seção: Mais do mesmo autor -->
+                    <div class="more-by-author">
+                        <h3>Mais do autor</h3>
+                        <!-- Grid com outros livros do mesmo autor (preenchido via JS) -->
+                        <div id="moreByAuthor" class="more-by-author-grid">
+                            <!-- preenchido via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+        <p>&copy; Livraria 2025</p>
+    </footer>
+
+    <!-- Seção de busca alternativa (não utilizada) -->
+    <section class="search-area">
+        <input type="text" placeholder="Pesquisar livros...">
+    </section>
+
+    <!-- Script principal com toda a lógica do catálogo -->
+    <script src="../loja/catalogo.js"></script>
+</body>
+</html>
