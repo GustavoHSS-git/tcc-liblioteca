@@ -19,7 +19,211 @@ app.use('/dadoslivros', express.static(path.join(__dirname, 'dadoslivros')));
 app.use('/leitura', express.static(path.join(__dirname, 'leitura')));
 app.use('/loja', express.static(path.join(__dirname, 'loja')));
 app.use('/fotos', express.static(path.join(__dirname, 'fotos')));
-app.use('/api', express.static(path.join(__dirname, 'api')));
+
+// ============================================
+// 📖 DADOS DOS LIVROS (API)
+// ============================================
+const books = [
+    {
+        id: 1,
+        title: "As Relíquias da Morte",
+        author: "J.K. Rowling",
+        price: 89.90,
+        image: "/fotos/33.jpg",
+        images: ["/fotos/33.jpg", "/fotos/33.jpg"],
+        description: "O sétimo e último livro da saga Harry Potter. A busca pelas Relíquias da Morte se torna crucial na luta final contra Voldemort.",
+        category: "livro"
+    },
+    {
+        id: 2,
+        title: "Os Dois Morrem no Final",
+        author: "Adam Silvera",
+        price: 54.90,
+        image: "/fotos/30.jpg",
+        images: ["/fotos/30.jpg", "/fotos/30.jpg"],
+        description: "Um romance emocionante sobre dois rapazes que recebem a notícia de que morrerão no mesmo dia.",
+        category: "livro"
+    },
+    {
+        id: 3,
+        title: "A Menina do Outro Lado",
+        author: "Nagabe",
+        price: 45.00,
+        image: "/fotos/17.jpg",
+        images: ["/fotos/17.jpg", "/fotos/17.jpg"],
+        description: "Um mangá encantador sobre uma menina misteriosa e as histórias que a cercam.",
+        category: "manga"
+    },
+    {
+        id: 4,
+        title: "A Canção de Aquiles",
+        author: "Madeline Miller",
+        price: 62.90,
+        image: "/fotos/13.jpg",
+        images: ["/fotos/13.jpg", "/fotos/13.jpg"],
+        description: "Uma reinterpretação poética da história de Aquiles e Pátroclo durante a Guerra de Troia.",
+        category: "livro"
+    },
+    {
+        id: 5,
+        title: "Jujutsu Kaisen: Batalha de Feiticeiros",
+        author: "Gege Akutami",
+        price: 35.00,
+        image: "/fotos/27.jpg",
+        images: ["/fotos/27.jpg", "/fotos/27.jpg"],
+        description: "Um mangá de ação e fantasia sobre jovens feiticeiros que combatem espíritos amaldiçoados.",
+        category: "manga"
+    },
+    {
+        id: 6,
+        title: "O Cara Que Estou a Fim não É um Cara?!",
+        author: "Sumiko Arai",
+        price: 38.90,
+        image: "/fotos/18.jpg",
+        images: ["/fotos/18.jpg", "/fotos/18.jpg"],
+        description: "Um mangá romântico e cômico que desafia as expectativas de identidade e amor.",
+        category: "manga"
+    },
+    {
+        id: 7,
+        title: "Dragon Ball Super Vol. 1",
+        author: "Akira Toriyama",
+        price: 49.90,
+        image: "/fotos/paginas/dbz1.jpg",
+        images: ["/fotos/paginas/3 (1).jpg", "/fotos/paginas/3 (2).jpg", "/fotos/paginas/3 (3).jpg"],
+        description: "A continuação da famosa série Dragon Ball, onde Goku e seus amigos enfrentam novos desafios e inimigos poderosos.",
+        category: "manga"
+    },
+    {
+        id: 8,
+        title: "O Príncipe Cruel",
+        author: "Katherine Arden",
+        price: 52.90,
+        image: "/fotos/21.jpg",
+        images: ["/fotos/21.jpg", "/fotos/21.jpg"],
+        description: "Um romance de fantasia sobre um príncipe cruel e uma jovem que se vê envolvida em sua história.",
+        category: "livro"
+    },
+    {
+        id: 9,
+        title: "Dragon Ball Super Vol. 2",
+        author: "Akira Toriyama",
+        price: 49.90,
+        image: "/fotos/dbz2.jpg",
+        images: ["/fotos/dbz2.jpg"],
+        description: "Continuação da série com novos desafios intergalácticos e batalhas épicas.",
+        category: "manga"
+    },
+    {
+        id: 10,
+        title: "Câmara Secreta",
+        author: "J.K. Rowling",
+        price: 85.00,
+        image: "/fotos/32.jpg",
+        images: ["/fotos/32.jpg"],
+        description: "O segundo livro da saga Harry Potter. Mistérios e perigos rondam Hogwarts.",
+        category: "livro"
+    }
+];
+
+// ============================================
+// 🔧 ENDPOINTS DA API
+// ============================================
+
+// GET /api/livros - Retorna todos os livros
+app.get('/api/livros', (req, res) => {
+    res.json({
+        success: true,
+        data: books,
+        count: books.length
+    });
+});
+
+// GET /api/livros/:id - Retorna um livro específico
+app.get('/api/livros/:id', (req, res) => {
+    const { id } = req.params;
+    const book = books.find(b => b.id === parseInt(id));
+
+    if (!book) {
+        return res.status(404).json({
+            success: false,
+            message: "Livro não encontrado"
+        });
+    }
+
+    res.json({
+        success: true,
+        data: book
+    });
+});
+
+// GET /api/livros/autor/:author - Retorna livros por autor
+app.get('/api/livros/autor/:author', (req, res) => {
+    const { author } = req.params;
+    const filtered = books.filter(b => b.author.toLowerCase() === author.toLowerCase());
+
+    res.json({
+        success: true,
+        data: filtered,
+        count: filtered.length
+    });
+});
+
+// GET /api/mangas - Retorna todos os mangás
+app.get('/api/mangas', (req, res) => {
+    const mangas = books.filter(b => b.category === 'manga');
+    res.json({
+        success: true,
+        data: mangas,
+        count: mangas.length
+    });
+});
+
+// GET /api/categorias/:category - Retorna livros por categoria
+app.get('/api/categorias/:category', (req, res) => {
+    const { category } = req.params;
+    const filtered = books.filter(b => b.category === category.toLowerCase());
+
+    res.json({
+        success: true,
+        data: filtered,
+        count: filtered.length
+    });
+});
+
+// GET /api/buscar - Busca por título ou autor
+app.get('/api/buscar', (req, res) => {
+    const { q } = req.query;
+
+    if (!q) {
+        return res.status(400).json({
+            success: false,
+            message: "Parâmetro 'q' é obrigatório"
+        });
+    }
+
+    const searchTerm = q.toLowerCase();
+    const results = books.filter(b =>
+        b.title.toLowerCase().includes(searchTerm) ||
+        b.author.toLowerCase().includes(searchTerm)
+    );
+
+    res.json({
+        success: true,
+        data: results,
+        count: results.length,
+        query: q
+    });
+});
+
+// GET /api/status - Health check
+app.get('/api/status', (req, res) => {
+    res.json({
+        success: true,
+        message: "API está funcionando!",
+        timestamp: new Date().toISOString()
+    });
+});
 
 // Rota principal - Serve o Login como página inicial
 app.get('/', (req, res) => {
@@ -27,10 +231,6 @@ app.get('/', (req, res) => {
 });
 
 // Rota para pages antigas (compatibilidade)
-app.get('/Login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'Login', 'Login.html'));
-});
-
 app.get('/inicial', (req, res) => {
   res.sendFile(path.join(__dirname, 'inicial', 'i.html'));
 });
@@ -41,11 +241,6 @@ app.get('/biblioteca', (req, res) => {
 
 app.get('/loja', (req, res) => {
   res.sendFile(path.join(__dirname, 'loja', 'catalogo.html'));
-});
-
-// Tratamento de erro 404
-app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, 'Login', 'Login.html'));
 });
 
 // Iniciar servidor

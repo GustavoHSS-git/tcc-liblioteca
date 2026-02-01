@@ -3,7 +3,7 @@
 // ============================================
 // Array que será preenchido pela API
 // URL da API: http://localhost:3000
-const API_URL = "http://localhost:3000/api";
+const API_URL = "/api";
 let books = [];
 
 // ============================================
