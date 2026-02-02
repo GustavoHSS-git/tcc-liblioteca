@@ -127,6 +127,39 @@ body {
     transform: scale(1.05);
 }
 
+.admin-btn,
+.logout-btn {
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.admin-btn:hover {
+    background: linear-gradient(135deg, #a78bfa, #9D4EDD);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.logout-btn {
+    background: linear-gradient(135deg, #EF4444, #DC2626);
+}
+
+.logout-btn:hover {
+    background: linear-gradient(135deg, #F87171, #EF5350);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
 /* ============================================
    FILTROS E BUSCA
    ============================================ */

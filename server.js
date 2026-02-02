@@ -415,6 +415,10 @@ app.get('/leitura', (req, res) => {
   res.sendFile(path.join(__dirname, 'leitura', 'Leitura.html'));
 });
 
+app.get('/admin-login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin', 'admin-login.html'));
+});
+
 app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'admin', 'admin.html'));
 });
