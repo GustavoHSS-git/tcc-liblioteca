@@ -80,8 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     // Ao submeter (Enter ou click em Entrar):
     // - Valida email e senha
-    // - Se OK: mostra notificação de sucesso
-    // - Aguarda 1.5s e redireciona para página inicial (../inicial/i.html)
+    // - Se OK: verifica se são credenciais de admin
+    // - Se admin: redireciona para /admin e salva autenticação
+    // - Se não admin: redireciona para /inicial/i.html
     // - Se erro: mostra mensagem de erro e mantém na página
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -103,17 +104,41 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Simular login
-        console.log('Login:', { email, password, remember });
-        
-        // Mostrar mensagem de sucesso
-        showNotification('Login realizado com sucesso!', 'success');
+        // Credenciais de admin
+        const ADMIN_EMAIL = 'admin@biblioteca.com';
+        const ADMIN_PASSWORD = '123456';
 
-        // Simular delay e redirecionamento
-        setTimeout(() => {
-            // Redireciona para a página inicial real do projeto
-            window.location.href = '../inicial/i.html';
-        }, 1500);
+        // Verificar se são credenciais de admin
+        if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+            // Login de admin bem-sucedido
+            console.log('Login admin realizado');
+            
+            // Salvar sessão de admin
+            sessionStorage.setItem('adminLogged', 'true');
+            sessionStorage.setItem('adminUser', email);
+            sessionStorage.setItem('loginTime', new Date().toISOString());
+            
+            // Mostrar mensagem de sucesso
+            showNotification('Bem-vindo Admin! Abrindo painel...', 'success');
+
+            // Simular delay e redirecionamento
+            setTimeout(() => {
+                // Redireciona para o painel de admin
+                window.location.href = '/admin';
+            }, 1500);
+        } else {
+            // Login de usuário comum
+            console.log('Login de usuário comum:', { email, password, remember });
+            
+            // Mostrar mensagem de sucesso
+            showNotification('Login realizado com sucesso!', 'success');
+
+            // Simular delay e redirecionamento
+            setTimeout(() => {
+                // Redireciona para a página inicial real do projeto
+                window.location.href = '../inicial/i.html';
+            }, 1500);
+        }
     });
 
     // ============================================
