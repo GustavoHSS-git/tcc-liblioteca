@@ -94,16 +94,17 @@ const books = [
         images: [
             "/fotos/paginas/dbz1.jpg",
             "/fotos/paginas/3 (1).jpg",
-            "/fotos/paginas/3 (2).jpg",
         ],
         description: "A continuação da famosa série Dragon Ball, onde Goku e seus amigos enfrentam novos desafios e inimigos poderosos.",
         category: "manga",
         pages: [
-            "/fotos/paginas/dbz1.jpg",
-            "/fotos/paginas/dbz2.jpg",
-            "/fotos/paginas/dbz3.jpg",
-            "/fotos/paginas/dbz4.jpg",
-            "/fotos/paginas/dbz5.jpg"
+            "/fotos/paginas/3 (1).jpg",
+            "/fotos/paginas/3 (2).jpg",
+            "/fotos/paginas/3 (3).jpg",
+            "/fotos/paginas/3 (4).jpg",
+            "/fotos/paginas/3 (5).jpg",
+            "/fotos/paginas/3 (6).jpg",
+            "/fotos/paginas/3 (7).jpg"
         ]
     },
     {

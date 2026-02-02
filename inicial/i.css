@@ -170,7 +170,7 @@ html, body {
 
 .member-info {
     text-align: center;
-    margin-top: 10px; /* Diminuído para aproximar do carrossel */
+    margin-top: 40px; /* Aumentado para melhor espaçamento entre carrossel e título */
     flex-shrink: 0;
 }
 
