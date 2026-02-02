@@ -1,169 +1,95 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Leitura - Livraria</title>
-  <!-- Estilos do leitor de livros -->
-  <link rel="stylesheet" href="/navbar.css">
-  <link rel="stylesheet" href="/leitura/leitura.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitura - Livraria</title>
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/leitura/leitura.css">
 </head>
 <body>
-  <!-- ============================
-       HEADER: Navegação
-       ============================ -->
-  <header class="page-top">
-      <nav class="navbar">
-          <div class="container">
-              <div class="nav-left">
-                  <a href="/" class="brand">
-                      <img src="/fotos/logo.png" alt="Logo Biblioteca" class="brand-img" />
-                  </a>
-                  <ul class="nav-links">
-                      <li><a href="/inicial/i.html" class="nav-link">Início</a></li>
-                      <li><a href="/loja" class="nav-link">Loja</a></li>
-                      <li><a href="/biblioteca" class="nav-link">Biblioteca</a></li>
-                  </ul>
-              </div>
-              <div class="nav-right">
-                  <button class="cart-btn" id="cartBtn">
-                      🛒 Carrinho (<span id="cartCount">0</span>)
-                  </button>
-              </div>
-          </div>
-      </nav>
-  </header>
+    <header class="page-top">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-left">
+                    <a href="/" class="brand">
+                        <img src="/fotos/logo.png" alt="Logo" class="brand-img" />
+                    </a>
+                    <ul class="nav-links">
+                        <li><a href="/inicial/i.html" class="nav-link">Início</a></li>
+                        <li><a href="/loja/catalogo.html" class="nav-link">Loja</a></li>
+                        <li><a href="/biblioteca" class="nav-link">Biblioteca</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-  <!-- ============================
-       LEITOR PRINCIPAL
-       ============================ -->
-  <main class="reader-container">
-    <!-- Barra de controles superior -->
-    <div class="reader-toolbar">
-      <div class="toolbar-left">
-        <!-- Botão voltar e título do livro -->
-        <button class="btn-back" id="btnBack" title="Voltar">
-          ← Voltar
-        </button>
-        <span class="book-title" id="bookTitle">Carregando...</span>
-      </div>
-      
-      <div class="toolbar-center">
-        <!-- Indicador de página (ex: "Página 5 de 100") -->
-        <span class="page-info" id="pageInfo">Página 1 de 1</span>
-      </div>
-
-      <div class="toolbar-right">
-        <!-- Botão para abrir painel de configurações -->
-        <button class="btn-settings" id="btnSettings" title="Configurações">⚙️</button>
-      </div>
-    </div>
-
-    <!-- ============================
-         ÁREA DE CONTEÚDO
-         ============================ -->
-    <div class="reader-content">
-      <!-- Navegação esquerda: página anterior -->
-      <div class="reader-nav reader-nav-left">
-        <button class="btn-nav" id="btnPrevPage" title="Página anterior">‹</button>
-      </div>
-
-      <!-- Display central: mostra imagem da página -->
-      <div class="reader-display">
-        <div class="page-container">
-          <!-- Imagem da página atual do livro -->
-          <img id="pageImage" src="" alt="Página do livro" class="page-image">
+    <main class="reader-container">
+        <div class="reader-toolbar">
+            <div class="toolbar-left">
+                <button class="btn-back" id="btnBack">← Voltar</button>
+                <span class="book-title" id="bookTitle">Carregando...</span>
+            </div>
+            <div class="toolbar-center">
+                <span class="page-info" id="pageInfo">Página 1 de 1</span>
+            </div>
+            <div class="nav-right">
+                    <button class="btn-fullscreen" id="btnFullscreen">⛶</button>
+                </div>
+            <div class="toolbar-right">
+                <button class="btn-settings" id="btnSettings">⚙️</button>
+            </div>
         </div>
-      </div>
 
-      <!-- Navegação direita: próxima página -->
-      <div class="reader-nav reader-nav-right">
-        <button class="btn-nav" id="btnNextPage" title="Próxima página">›</button>
-      </div>
-    </div>
+        <div class="reader-content">
+            <div class="reader-nav reader-nav-left" id="btnPrevPage">
+                <button class="btn-nav">‹</button>
+            </div>
 
-    <!-- ============================
-         CONTROLES INFERIORES
-         ============================ -->
-    <div class="reader-controls">
-      <div class="controls-left">
-        <!-- Botão marcador para salvar posição -->
-        <button class="btn-control" id="btnBookmark" title="Adicionar marcador">🔖</button>
-      </div>
+            <div class="reader-display" id="readerDisplay">
+                <div class="page-container">
+                    <img id="pageImage" src="" alt="Página do livro" class="page-image">
+                </div>
+            </div>
 
-      <div class="controls-center">
-        <!-- Slider para navegar páginas rapidamente -->
-        <input 
-          type="range" 
-          id="pageSlider" 
-          class="page-slider"
-          min="1" 
-          max="100" 
-          value="1"
-          title="Navegar por páginas"
-        >
-      </div>
-
-      <div class="controls-right">
-      </div>
-    </div>
-  </main>
-
-  <!-- ============================
-       PAINEL DE CONFIGURAÇÕES
-       ============================ -->
-  <div class="settings-panel" id="settingsPanel">
-    <div class="settings-content">
-      <h3>Configurações de Leitura</h3>
-      
-      <!-- Tamanho da Fonte -->
-      <div class="setting-group">
-        <label>Tamanho da Fonte</label>
-        <div class="font-size-controls">
-          <button class="btn-size" id="btnFontSmall">A</button>
-          <button class="btn-size btn-size-active" id="btnFontNormal">A</button>
-          <button class="btn-size" id="btnFontLarge">A</button>
+            <div class="reader-nav reader-nav-right" id="btnNextPage">
+                <button class="btn-nav">›</button>
+            </div>
         </div>
-      </div>
 
-      <!-- Brilho -->
-      <div class="setting-group">
-        <label for="brightness">Brilho</label>
-        <input type="range" id="brightness" min="50" max="150" value="100" class="slider">
-      </div>
-
-      <!-- Tema -->
-      <div class="setting-group">
-        <label>Tema</label>
-        <div class="theme-controls">
-          <button class="btn-theme" id="btnThemeLight">☀️ Claro</button>
-          <button class="btn-theme" id="btnThemeSepia">📖 Sépia</button>
-          <button class="btn-theme" id="btnThemeDark">🌙 Escuro</button>
+        <div class="reader-controls">
+            <div class="controls-left">
+                <button class="btn-control" id="btnBookmark">🔖</button>
+            </div>
+            <div class="controls-center">
+                <input type="range" id="pageSlider" class="page-slider" min="1" value="1">
+            </div>
+            <div class="controls-right"></div>
         </div>
-      </div>
+    </main>
 
-      <!-- Espaçamento de Linhas -->
-      <div class="setting-group">
-        <label for="lineHeight">Espaçamento</label>
-        <input type="range" id="lineHeight" min="1" max="2" step="0.1" value="1.5" class="slider">
-      </div>
-
-      <button class="btn-close-settings" id="btnCloseSettings">Fechar</button>
+    <div class="settings-panel" id="settingsPanel">
+        <div class="settings-content">
+            <h3>Configurações de Leitura</h3>
+            <div class="setting-group">
+                <label>Brilho</label>
+                <input type="range" id="brightness" min="50" max="150" value="100" class="slider">
+            </div>
+            <div class="setting-group">
+                <label>Cor do Fundo</label>
+                <div class="color-options">
+                    <button class="color-btn" id="colorWhite" title="Branco" style="background-color: #ffffff;" data-color="#ffffff"></button>
+                    <button class="color-btn" id="colorCream" title="Creme" style="background-color: #fffdd0;" data-color="#fffdd0"></button>
+                    <button class="color-btn" id="colorBeige" title="Bege" style="background-color: #f5e6d3;" data-color="#f5e6d3"></button>
+                    <button class="color-btn" id="colorGray" title="Cinza Claro" style="background-color: #f0f0f0;" data-color="#f0f0f0"></button>
+                    <button class="color-btn" id="colorDark" title="Modo Noturno" style="background-color: #2c2c2c;" data-color="#2c2c2c"></button>
+                </div>
+            </div>
+            <button class="btn-close-settings" id="btnCloseSettings">Fechar</button>
+        </div>
     </div>
-  </div>
 
-  <!-- Bookmarks Panel -->
-  <div class="bookmarks-panel" id="bookmarksPanel">
-    <div class="bookmarks-content">
-      <h3>Meus Marcadores</h3>
-      <div class="bookmarks-list" id="bookmarksList">
-        <p class="empty-message">Nenhum marcador ainda</p>
-      </div>
-    </div>
-  </div>
-
-
-
-  <script src="/leitura/leitura.js"></script>
+    <script src="/leitura/leitura.js"></script>
 </body>
 </html>

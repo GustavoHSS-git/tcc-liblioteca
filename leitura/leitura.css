@@ -11,10 +11,12 @@
 body {
     height: 100vh;
     width: 100vw;
-    overflow: hidden; /* Remove scroll */
+    overflow-x: hidden;
+    overflow-y: auto; /* permite rolagem vertical para ver controles inferiores */
     background-color: var(--primary-color);
     display: flex;
     flex-direction: column;
+    padding-bottom: 100px; /* garante espaço para os controles na base */
 }
 
 /* Transição para ocultação automática */
@@ -90,6 +92,8 @@ body {
     padding: 0 20px;
     gap: 10px;
     border-top: 1px solid var(--border-color);
+    position: relative;
+    z-index: 30;
 }
 
 .page-slider {
@@ -108,6 +112,34 @@ body {
     box-shadow: -5px 0 15px rgba(0,0,0,0.1);
     transition: 0.3s;
     z-index: 2000;
+    overflow-y: auto;
+}
+
+.color-options {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.color-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    border: 3px solid #ddd;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 0 0 calc(50% - 6px);
+}
+
+.color-btn:hover {
+    transform: scale(1.05);
+    border-color: #999;
+}
+
+.color-btn.active {
+    border: 3px solid #007385;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #007385;
 }
 
 .settings-panel.active { right: 0; }
@@ -134,30 +166,31 @@ body {
 
 /* toolbar mais leve com blur e título central */
 .reader-toolbar {
-    background: rgba(255,255,255,0.88);
-    backdrop-filter: blur(6px);
-    height: 64px;
-    padding: 0 18px;
-    border-radius: 10px;
-    margin: 10px 20px 0 20px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(4px);
+    height: 56px;
+    padding: 0 12px;
+    border-radius: 8px;
+    margin: 8px 12px 0 12px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
     align-items: center;
 }
 
 .reader-toolbar .toolbar-left,
 .reader-toolbar .toolbar-center,
 .reader-toolbar .toolbar-right {
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 8px;
 }
 
 .reader-toolbar .book-title {
-    font-weight: 700; color: var(--text-dark); font-size: 1.05rem;
+    font-weight: 700; color: var(--text-dark); font-size: 1rem; max-width: 260px;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
 /* display com fundo sutil e borda arredondada */
 .reader-display {
     flex: 1; display: flex; align-items: center; justify-content: center;
-    padding: 24px; margin: 18px; border-radius: 14px;
+    padding: 16px; margin: 12px; border-radius: 12px;
     background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.03));
 }
 
@@ -170,19 +203,25 @@ body {
 
 /* setas sobrepostas semi-transparentes */
 .reader-nav {
-    background: transparent; width: 72px; display:flex; align-items:center; justify-content:center;
+    background: transparent; width: 64px; display:flex; align-items:center; justify-content:center;
 }
 .reader-nav .btn-nav {
-    background: rgba(255,255,255,0.85); color: var(--text-dark); border-radius: 50%; width: 54px; height: 54px;
-    display:flex; align-items:center; justify-content:center; font-size: 1.6rem; box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    background: rgba(255,255,255,0.95); color: var(--text-dark); border-radius: 50%; width: 48px; height: 48px;
+    display:flex; align-items:center; justify-content:center; font-size: 1.4rem; box-shadow: 0 6px 14px rgba(0,0,0,0.12);
 }
 .reader-nav:hover .btn-nav { transform: translateY(-2px); }
 
-.reader-controls { border-radius: 10px; margin: 0 20px 18px 20px; }
-.page-slider { height: 8px; border-radius: 999px; }
+.reader-controls { border-radius: 8px; margin: 0 12px 12px 12px; display:flex; align-items:center; justify-content:center; height:48px; background: transparent; padding: 8px 12px; }
+.page-slider { height: 6px; border-radius: 999px; width: 60%; max-width: 720px; accent-color: var(--primary-color); }
 
-.btn-control, .btn-back, .btn-fullscreen, .btn-settings { background: white; border-radius: 8px; padding: 8px 12px; border: 1px solid rgba(0,0,0,0.06); cursor: pointer; }
+.btn-control, .btn-back, .btn-fullscreen, .btn-settings { background: #007385; border-radius: 8px; padding: 6px 10px; border: 1px solid rgba(0,0,0,0.06); cursor: pointer; }
 .btn-back { display:flex; align-items:center; gap:8px; }
+
+/* ocultar botões laterais do reader-controls e manter somente o slider central */
+.reader-controls .controls-left,
+.reader-controls .controls-right { display: none; }
+.reader-controls .controls-center { width: 100%; display:flex; justify-content:center; }
+.reader-controls .controls-center .page-slider { width: 100%; max-width: 680px; }
 
 /* settings panel visual */
 .settings-panel {

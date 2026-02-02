@@ -45,7 +45,7 @@
         "../fotos/41.jpg",
     ];
 
-    listImages.forEach(img => {
+    listImages.forEach((img, idx) => {
         const imgUrl = encodeURI(img);
 
         const wrapper = document.createElement('div');
@@ -55,8 +55,62 @@
         card.className = 'd-steam-card';
         card.style.backgroundImage = `url('${imgUrl}')`;
 
-        card.addEventListener('click', () => {
-            window.location.href = "../leitura/leitura.html?page=1";
+        card.addEventListener('click', async () => {
+            // tenta encontrar metadados do livro na API pelo caminho da imagem
+            const normalized = img.replace(/^\.\./, ''); // '../fotos/xxx' -> '/fotos/xxx'
+            let pagesForReader = null;
+            let bookId = `book-${idx}`;
+            let bookTitle = `Livro ${idx + 1}`;
+
+            try {
+                const res = await fetch('/api/livros');
+                if (res.ok) {
+                    const json = await res.json();
+                    const found = (json.data || []).find(b => {
+                        if (!b) return false;
+                        if (b.image === normalized) return true;
+                        if (Array.isArray(b.images) && b.images.includes(normalized)) return true;
+                        return false;
+                    });
+                            if (found) {
+                                bookId = `book-${found.id}`;
+                                bookTitle = found.title || bookTitle;
+                                // tenta buscar as páginas via novo endpoint
+                                try {
+                                    const pagesRes = await fetch(`/api/livros/${found.id}/pages`);
+                                    if (pagesRes.ok) {
+                                        const pj = await pagesRes.json();
+                                        if (Array.isArray(pj.data) && pj.data.length) pagesForReader = pj.data;
+                                    }
+                                } catch (err) {
+                                    console.warn('Erro buscando páginas do livro', err);
+                                }
+                                // fallback para image/capas se endpoint não retornou nada
+                                if (!pagesForReader) {
+                                    if (Array.isArray(found.images) && found.images.length) pagesForReader = found.images;
+                                    else if (found.image) pagesForReader = [found.image];
+                                }
+                            }
+                }
+            } catch (err) {
+                console.warn('Erro consultando API de livros', err);
+            }
+
+            // se não encontrou páginas, usar fallback simples (imagem da capa)
+            if (!pagesForReader) {
+                pagesForReader = [normalized];
+                alert('Páginas completas não encontradas para este livro. Abrindo imagem da capa como fallback.');
+            }
+
+            try {
+                localStorage.setItem('readerPages', JSON.stringify(pagesForReader));
+                localStorage.setItem('readerBookId', bookId);
+                localStorage.setItem('readerTitle', bookTitle);
+            } catch (err) {
+                console.warn('Erro armazenando dados do leitor', err);
+            }
+
+            window.location.href = "../leitura/Leitura.html?page=1";
         });
 
         wrapper.appendChild(card);

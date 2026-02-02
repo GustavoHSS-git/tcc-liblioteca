@@ -1,4 +1,5 @@
-const pages = [
+// páginas padrão (usado se não houver nada em localStorage)
+const defaultPages = [
     "../fotos/paginas/dbz1.jpg",
     "../fotos/paginas/3 (1).jpg",
     "../fotos/paginas/3 (2).jpg",
@@ -7,9 +8,20 @@ const pages = [
     "../fotos/paginas/3 (5).jpg"
 ];
 
+// Carrega páginas e metadados do localStorage se disponíveis
+let pages = defaultPages;
+try {
+    const stored = localStorage.getItem('readerPages');
+    if (stored) pages = JSON.parse(stored);
+} catch (err) {
+    console.warn('Erro ao ler readerPages do localStorage', err);
+}
+
 let currentPage = 1;
-const totalPages = pages.length;
+let totalPages = pages.length;
 let controlsTimeout;
+const readerBookId = localStorage.getItem('readerBookId') || 'default-book';
+const readerTitleStored = localStorage.getItem('readerTitle') || '';
 
 // Elementos
 const pageImage = document.getElementById('pageImage');
@@ -20,8 +32,23 @@ const settingsPanel = document.getElementById('settingsPanel');
 const readerDisplay = document.getElementById('readerDisplay');
 
 function initReader() {
-    bookTitle.textContent = 'Dragon Ball Z';
+    // título do livro (se fornecido pela página anterior)
+    bookTitle.textContent = readerTitleStored || 'Livro';
+    totalPages = pages.length;
     pageSlider.max = totalPages;
+
+    // tenta restaurar progresso salvo para este livro
+    const saved = localStorage.getItem(`readerProgress_${readerBookId}`);
+    if (saved) {
+        const savedPage = parseInt(saved, 10);
+        if (!isNaN(savedPage) && savedPage >= 1 && savedPage <= totalPages) currentPage = savedPage;
+    }
+
+    // respeitar query param ?page=
+    const params = new URLSearchParams(window.location.search);
+    const qp = parseInt(params.get('page'), 10);
+    if (!isNaN(qp) && qp >= 1 && qp <= totalPages) currentPage = qp;
+
     updatePage();
     resetTimer();
 }
@@ -35,6 +62,22 @@ function updatePage() {
         pageImage.onload = () => pageImage.style.opacity = '1';
     }, 200);
 }
+
+// salvar progresso automaticamente quando a página muda
+function saveProgress() {
+    try {
+        localStorage.setItem(`readerProgress_${readerBookId}`, String(currentPage));
+    } catch (err) {
+        console.warn('Erro salvando progresso', err);
+    }
+}
+
+// intercepta mudanças de página para salvar
+const origUpdatePage = updatePage;
+updatePage = function() {
+    origUpdatePage();
+    saveProgress();
+};
 
 function nextPage() { if (currentPage < totalPages) { currentPage++; updatePage(); } }
 function prevPage() { if (currentPage > 1) { currentPage--; updatePage(); } }
@@ -53,6 +96,11 @@ const btnPrev = document.getElementById('btnPrevPage');
 if (btnNext) btnNext.onclick = nextPage;
 if (btnPrev) btnPrev.onclick = prevPage;
 if (pageSlider) pageSlider.oninput = (e) => { currentPage = parseInt(e.target.value); updatePage(); };
+
+// caso as páginas tenham sido carregadas via localStorage, certifica-se de atualizar slider e total
+if (pageSlider) {
+    pageSlider.max = pages.length;
+}
 
 // Interface Inteligente
 function toggleUI(show) {
@@ -85,6 +133,27 @@ const brightnessInput = document.getElementById('brightness');
 if (btnSettings) btnSettings.onclick = () => settingsPanel.classList.toggle('active');
 if (btnCloseSettings) btnCloseSettings.onclick = () => settingsPanel.classList.remove('active');
 if (brightnessInput) brightnessInput.oninput = (e) => { readerDisplay.style.filter = `brightness(${e.target.value}%)`; };
+
+// Cores de fundo para leitura
+const colorButtons = document.querySelectorAll('.color-btn');
+const currentBackgroundColor = localStorage.getItem('readerBackgroundColor') || '#ffffff';
+
+// Aplicar cor salva ao carregar
+document.body.style.backgroundColor = currentBackgroundColor;
+colorButtons.forEach(btn => {
+    if (btn.getAttribute('data-color') === currentBackgroundColor) {
+        btn.classList.add('active');
+    }
+    btn.addEventListener('click', (e) => {
+        const color = e.target.getAttribute('data-color');
+        document.body.style.backgroundColor = color;
+        localStorage.setItem('readerBackgroundColor', color);
+        
+        // Atualizar estado visual dos botões
+        colorButtons.forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+    });
+});
 
 // Fullscreen e Voltar
 const btnFullscreen = document.getElementById('btnFullscreen');

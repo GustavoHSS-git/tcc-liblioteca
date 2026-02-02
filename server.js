@@ -90,7 +90,11 @@ const books = [
         author: "Akira Toriyama",
         price: 49.90,
         image: "/fotos/paginas/dbz1.jpg",
-        images: ["/fotos/paginas/3 (1).jpg", "/fotos/paginas/3 (2).jpg", "/fotos/paginas/3 (3).jpg"],
+        images: [
+            "/fotos/paginas/dbz1.jpg",
+            "/fotos/paginas/3 (1).jpg",
+            "/fotos/paginas/3 (2).jpg",
+        ],
         description: "A continuação da famosa série Dragon Ball, onde Goku e seus amigos enfrentam novos desafios e inimigos poderosos.",
         category: "manga"
     },
@@ -110,7 +114,11 @@ const books = [
         author: "Akira Toriyama",
         price: 49.90,
         image: "/fotos/paginas/dbz3.jpg",
-        images: ["/fotos/paginas/dbz3.jpg", "/fotos/paginas/3 (6).jpg"],
+        images: [
+            "/fotos/paginas/dbz3.jpg",
+            "/fotos/paginas/3 (6).jpg",
+            "/fotos/paginas/3 (7).jpg",
+        ],
         description: "Continuação da série com novos desafios intergalácticos e batalhas épicas.",
         category: "manga"
     },
@@ -154,6 +162,57 @@ app.get('/api/livros/:id', (req, res) => {
     res.json({
         success: true,
         data: book
+    });
+});
+
+// GET /api/livros/:id/pages - Retorna as páginas (imagens) de um livro
+app.get('/api/livros/:id/pages', (req, res) => {
+    const { id } = req.params;
+    const book = books.find(b => b.id === parseInt(id));
+
+    if (!book) {
+        return res.status(404).json({ success: false, message: 'Livro não encontrado' });
+    }
+
+    // Se o livro já contém um array `images`, retorna diretamente
+    if (Array.isArray(book.images) && book.images.length) {
+        return res.json({ success: true, data: book.images });
+    }
+
+    // Caso contrário, tenta ler um índice em /fotos/paginas/book-<id>/index.json
+    const fs = require('fs');
+    const pagesDir = path.join(__dirname, 'fotos', 'paginas', `book-${id}`);
+    const indexFile = path.join(pagesDir, 'index.json');
+
+    // se existir index.json, usa-o (permite apontar para imagens existentes sem copiar)
+    if (fs.existsSync(indexFile)) {
+        try {
+            const content = fs.readFileSync(indexFile, 'utf8');
+            const images = JSON.parse(content);
+            return res.json({ success: true, data: images });
+        } catch (err) {
+            console.warn('Erro lendo index.json para', book.id, err);
+            const fallback = [];
+            if (book.image) fallback.push(book.image);
+            return res.json({ success: true, data: fallback });
+        }
+    }
+
+    // se não houver index.json, tenta listar arquivos na pasta book-<id>
+    fs.readdir(pagesDir, (err, files) => {
+        if (err) {
+            // pasta não existe ou erro de leitura: usar imagem de capa (se existir)
+            const fallback = [];
+            if (book.image) fallback.push(book.image);
+            return res.json({ success: true, data: fallback });
+        }
+
+        const images = files
+            .filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f))
+            .sort()
+            .map(f => path.posix.join('/fotos/paginas', `book-${id}`, f));
+
+        return res.json({ success: true, data: images });
     });
 });
 
