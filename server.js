@@ -33,7 +33,8 @@ const books = [
         image: "/fotos/33.jpg",
         images: ["/fotos/33.jpg", "/fotos/33.jpg"],
         description: "O sétimo e último livro da saga Harry Potter. A busca pelas Relíquias da Morte se torna crucial na luta final contra Voldemort.",
-        category: "livro"
+        category: "livro",
+        authorBio: "J.K. Rowling é uma autora britânica mais conhecida por criar a série Harry Potter, que revolucionou a literatura infantil e se tornou um fenômeno cultural global."
     },
     {
         id: 2,
@@ -43,7 +44,8 @@ const books = [
         image: "/fotos/30.jpg",
         images: ["/fotos/30.jpg", "/fotos/30.jpg"],
         description: "Um romance emocionante sobre dois rapazes que recebem a notícia de que morrerão no mesmo dia.",
-        category: "livro"
+        category: "livro",
+        authorBio: "Adam Silvera é um autor americano que escreve sobre temas importantes como morte, identidade e relacionamentos LGBTQ+. Seus livros tocam profundamente os leitores."
     },
     {
         id: 3,
@@ -53,7 +55,8 @@ const books = [
         image: "/fotos/17.jpg",
         images: ["/fotos/17.jpg", "/fotos/17.jpg"],
         description: "Um mangá encantador sobre uma menina misteriosa e as histórias que a cercam.",
-        category: "manga"
+        category: "manga",
+        authorBio: "Nagabe é um mangaká japonês conhecido por suas obras atmosféricas e misteriosas. Seu estilo único combina suspense com sentimentos delicados e profundos."
     },
     {
         id: 4,
@@ -63,7 +66,8 @@ const books = [
         image: "/fotos/13.jpg",
         images: ["/fotos/13.jpg", "/fotos/13.jpg"],
         description: "Uma reinterpretação poética da história de Aquiles e Pátroclo durante a Guerra de Troia.",
-        category: "livro"
+        category: "livro",
+        authorBio: "Madeline Miller é uma autora americana que reimagina histórias mitológicas com sensibilidade e profundidade. Ela traz novas perspectivas aos clássicos antigos."
     },
     {
         id: 5,
@@ -73,7 +77,8 @@ const books = [
         image: "/fotos/27.jpg",
         images: ["/fotos/27.jpg", "/fotos/27.jpg"],
         description: "Um mangá de ação e fantasia sobre jovens feiticeiros que combatem espíritos amaldiçoados.",
-        category: "manga"
+        category: "manga",
+        authorBio: "Gege Akutami é um mangaká japonês criador de Jujutsu Kaisen. Seu trabalho é reconhecido por combinar ação emocionante com personagens bem desenvolvidos e narrativas complexas."
     },
     {
         id: 6,
@@ -83,7 +88,8 @@ const books = [
         image: "/fotos/18.jpg",
         images: ["/fotos/18.jpg", "/fotos/18.jpg"],
         description: "Um mangá romântico e cômico que desafia as expectativas de identidade e amor.",
-        category: "manga"
+        category: "manga",
+        authorBio: "Sumiko Arai é uma mangaká japonesa que explora temas de identidade, gênero e relacionamentos de forma leve e envolvente. Sua obra é conhecida pela representatividade."
     },
     {
         id: 7,
@@ -97,6 +103,7 @@ const books = [
         ],
         description: "A continuação da famosa série Dragon Ball, onde Goku e seus amigos enfrentam novos desafios e inimigos poderosos.",
         category: "manga",
+        authorBio: "Akira Toriyama é um renomado mangaká japonês, mundialmente conhecido por criar Dragon Ball e Dr. Slump, duas das obras mais influentes da história dos mangás. Seu estilo revolucionou a indústria.",
         pages: [
             "/fotos/paginas/3 (1).jpg",
             "/fotos/paginas/3 (2).jpg",
@@ -115,7 +122,8 @@ const books = [
         image: "/fotos/21.jpg",
         images: ["/fotos/21.jpg", "/fotos/21.jpg"],
         description: "Um romance de fantasia sobre um príncipe cruel e uma jovem que se vê envolvida em sua história.",
-        category: "livro"
+        category: "livro",
+        authorBio: "Katherine Arden é uma autora americana de fantasia e ficção histórica. Seus livros combinam romance, ação e elementos sobrenaturais de forma envolvente."
     },
     {
         id: 9,
@@ -129,7 +137,8 @@ const books = [
             "/fotos/paginas/3 (7).jpg",
         ],
         description: "Continuação da série com novos desafios intergalácticos e batalhas épicas.",
-        category: "manga"
+        category: "manga",
+        authorBio: "Akira Toriyama continua revolucionando a indústria de mangá com suas criações ousadas e personagens memoráveis que conquistaram gerações de fãs ao redor do mundo."
     },
     {
         id: 10,
@@ -139,8 +148,21 @@ const books = [
         image: "/fotos/37.jpg",
         images: ["/fotos/32.jpg"],
         description: "O segundo livro da saga Harry Potter. Mistérios e perigos rondam Hogwarts.",
-        category: "livro"
+        category: "livro",
+        authorBio: "J.K. Rowling criou um universo mágico que capturou a imaginação de milhões. Sua capacidade de tecer histórias complexas e envolventes a torna uma das autoras mais lidas do mundo."
+    },
+    {
+        id: 11,
+        title: "O Hobbit",
+        author: "J.R.R. Tolkien",
+        price: 45.00,
+        image: "/fotos/38.jpg",
+        images: ["/fotos/38.jpg", "/fotos/38.jpg"],
+        description: "A jornada épica de Bilbo Bolseiro, um hobbit que se vê envolvido em uma aventura inesperada.",
+        category: "livro",
+        authorBio: "J.R.R. Tolkien é um autor britânico mais conhecido por criar o universo de Middle-earth, incluindo a saga do Hobbit e do Senhor dos Anéis."
     }
+    
 ];
 
 // ============================================

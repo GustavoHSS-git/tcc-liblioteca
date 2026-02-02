@@ -86,6 +86,16 @@ const cartTotal = document.getElementById("cartTotal");
 const checkoutBtn = document.getElementById("checkoutBtn");
 
 let filteredBooks = [...books];
+let currentDetailBookId = null;
+
+// ============================================
+// 🔗 NAVEGAÇÃO PARA DADOS DO LIVRO
+// ============================================
+function irParaDadosLivro() {
+    if (currentDetailBookId) {
+        window.location.href = `/dadoslivros/?id=${currentDetailBookId}`;
+    }
+}
 
 // ============================================
 // 🔄 CARREGAR DADOS DA API
@@ -163,7 +173,8 @@ function renderBooks(booksToRender = books) {
                 <p class="book-author">por ${book.author}</p>
                 <div class="book-price">R$ ${book.price.toFixed(2)}</div>
                 <div class="book-actions">
-                    <button class="view-btn" onclick="showDetail(${book.id})">Detalhes</button>
+                        <button class="view-btn" onclick="showDetail(${book.id})">Detalhes</button>
+
                     <button class="add-btn" onclick="addToCart(${book.id})">Comprar</button>
                 </div>
             </div>
@@ -257,6 +268,7 @@ function removeFromCart(bookId) {
 // Também renderiza: "Mais do autor" (livros do mesmo autor) e miniaturas (galeria).
 function showDetail(bookId) {
     const book = books.find(b => b.id === bookId);
+    currentDetailBookId = bookId;
 
     if (book) {
         document.getElementById("detailImg").src = book.image;

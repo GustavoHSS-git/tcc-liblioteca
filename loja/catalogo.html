@@ -27,7 +27,7 @@
                 </div>
                 <div class="nav-right">
                     <button class="cart-btn" id="cartBtn">
-                        🛒 Carrinho (<span id="cartCount">0</span>)
+                        Carrinho (<span id="cartCount">0</span>)
                     </button>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     type="text" 
                     id="searchInput" 
                     class="search-input" 
-                    placeholder="🔍 Buscar por título ou autor..."
+                    placeholder="Buscar por título ou autor..."
                 >
                 <!-- Select para ordenação -->
                 <select id="sortSelect" class="sort-select">
@@ -121,6 +121,8 @@
                     </div>
                     <!-- Botão para adicionar ao carrinho -->
                     <button class="add-cart-btn" id="addCartBtn">Adicionar ao Carrinho</button>
+                    <!-- Botão para ir aos detalhes completos -->
+                    <button class="saber-mais-btn" onclick="irParaDadosLivro()">Saber mais</button>
                     
                     <!-- Seção: Mais do mesmo autor -->
                     <div class="more-by-author">

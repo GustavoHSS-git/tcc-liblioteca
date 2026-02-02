@@ -970,3 +970,24 @@ body {
         font-size: 1.5rem;
     }
 }
+
+.saber-mais-btn {
+    background: linear-gradient(135deg, #007385 0%, #005f6d 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 12px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.saber-mais-btn:hover {
+    background: linear-gradient(135deg, #005f6d 0%, #004a57 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 115, 133, 0.3);
+}
+
