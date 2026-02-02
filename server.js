@@ -96,7 +96,14 @@ const books = [
             "/fotos/paginas/3 (2).jpg",
         ],
         description: "A continuação da famosa série Dragon Ball, onde Goku e seus amigos enfrentam novos desafios e inimigos poderosos.",
-        category: "manga"
+        category: "manga",
+        pages: [
+            "/fotos/paginas/dbz1.jpg",
+            "/fotos/paginas/dbz2.jpg",
+            "/fotos/paginas/dbz3.jpg",
+            "/fotos/paginas/dbz4.jpg",
+            "/fotos/paginas/dbz5.jpg"
+        ]
     },
     {
         id: 8,
@@ -174,7 +181,12 @@ app.get('/api/livros/:id/pages', (req, res) => {
         return res.status(404).json({ success: false, message: 'Livro não encontrado' });
     }
 
-    // Se o livro já contém um array `images`, retorna diretamente
+    // Se o livro contém um array `pages` (para leitura completa), usa esse
+    if (Array.isArray(book.pages) && book.pages.length) {
+        return res.json({ success: true, data: book.pages, bookId: book.id, bookTitle: book.title });
+    }
+
+    // Se o livro já contém um array `images` (preview), retorna diretamente
     if (Array.isArray(book.images) && book.images.length) {
         return res.json({ success: true, data: book.images });
     }
