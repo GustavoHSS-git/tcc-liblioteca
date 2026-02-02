@@ -302,6 +302,10 @@ app.get('/loja', (req, res) => {
   res.sendFile(path.join(__dirname, 'loja', 'catalogo.html'));
 });
 
+app.get('/leitura', (req, res) => {
+  res.sendFile(path.join(__dirname, 'leitura', 'Leitura.html'));
+});
+
 // Iniciar servidor
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
