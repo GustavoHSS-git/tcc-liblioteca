@@ -43,6 +43,9 @@
         "../fotos/39.jpg",
         "../fotos/40.jpg",
         "../fotos/41.jpg",
+        "../fotos/paginas/dbz1.jpg",
+        "../fotos/paginas/dbz3.jpg",
+
     ];
 
     listImages.forEach((img, idx) => {
