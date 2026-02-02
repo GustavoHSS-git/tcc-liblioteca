@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Admin - Biblioteca Digital</title>
+    <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <h1>📚 Painel de Admin - Biblioteca Digital</h1>
+            <button id="logoutBtn" class="btn-logout">Sair</button>
+        </div>
+    </nav>
+
+    <main class="admin-container">
+        <div class="content-wrapper">
+            <!-- Formulário de Add/Edit -->
+            <section class="form-section">
+                <h2>Gerenciar Livros</h2>
+                <form id="bookForm" class="book-form">
+                    <div class="form-group">
+                        <label for="bookId">ID (apenas para editar)</label>
+                        <input type="number" id="bookId" placeholder="Auto-gerado" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookTitle">Título *</label>
+                        <input type="text" id="bookTitle" placeholder="Ex: Dragon Ball" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookAuthor">Autor *</label>
+                        <input type="text" id="bookAuthor" placeholder="Ex: Akira Toriyama" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookPrice">Preço (R$) *</label>
+                        <input type="number" id="bookPrice" placeholder="49.90" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookImage">URL da Capa *</label>
+                        <input type="text" id="bookImage" placeholder="/fotos/33.jpg" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookCategory">Categoria *</label>
+                        <select id="bookCategory" required>
+                            <option value="">-- Selecionar --</option>
+                            <option value="livro">Livro</option>
+                            <option value="manga">Mangá</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookDescription">Descrição</label>
+                        <textarea id="bookDescription" placeholder="Descrição do livro..." rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookPages">URLs das Páginas (separadas por vírgula)</label>
+                        <textarea id="bookPages" placeholder="/fotos/paginas/dbz1.jpg, /fotos/paginas/dbz2.jpg" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Salvar Livro</button>
+                        <button type="button" id="cancelBtn" class="btn-secondary">Cancelar</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Lista de Livros -->
+            <section class="books-list-section">
+                <h2>Livros Cadastrados</h2>
+                <div id="booksList" class="books-list">
+                    <p class="loading">Carregando livros...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="/admin/admin.js"></script>
+</body>
+</html>

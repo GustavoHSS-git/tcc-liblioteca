@@ -18,6 +18,7 @@ app.use('/biblioteca', express.static(path.join(__dirname, 'biblioteca')));
 app.use('/dadoslivros', express.static(path.join(__dirname, 'dadoslivros')));
 app.use('/leitura', express.static(path.join(__dirname, 'leitura')));
 app.use('/loja', express.static(path.join(__dirname, 'loja')));
+app.use('/admin', express.static(path.join(__dirname, 'admin')));
 app.use('/fotos', express.static(path.join(__dirname, 'fotos')));
 
 // ============================================
@@ -296,6 +297,102 @@ app.get('/api/status', (req, res) => {
     });
 });
 
+// ============================================
+// 📝 ENDPOINTS CRUD (POST, PUT, DELETE)
+// ============================================
+
+// POST /api/livros - Criar novo livro
+app.post('/api/livros', (req, res) => {
+    const { title, author, price, image, category, description, pages } = req.body;
+
+    // Validação
+    if (!title || !author || !price || !image || !category) {
+        return res.status(400).json({
+            success: false,
+            message: "Campos obrigatórios: title, author, price, image, category"
+        });
+    }
+
+    // Gerar novo ID
+    const newId = Math.max(...books.map(b => b.id), 0) + 1;
+
+    const newBook = {
+        id: newId,
+        title: title.trim(),
+        author: author.trim(),
+        price: parseFloat(price),
+        image: image.trim(),
+        images: [image.trim()],
+        category: category.toLowerCase(),
+        description: description || "",
+        pages: Array.isArray(pages) ? pages : (pages ? pages.split(',').map(p => p.trim()).filter(p => p) : [])
+    };
+
+    books.push(newBook);
+
+    res.status(201).json({
+        success: true,
+        message: "Livro criado com sucesso",
+        data: newBook
+    });
+});
+
+// PUT /api/livros/:id - Atualizar livro
+app.put('/api/livros/:id', (req, res) => {
+    const bookId = parseInt(req.params.id);
+    const { title, author, price, image, category, description, pages } = req.body;
+
+    const book = books.find(b => b.id === bookId);
+    if (!book) {
+        return res.status(404).json({
+            success: false,
+            message: "Livro não encontrado"
+        });
+    }
+
+    // Atualizar campos
+    if (title) book.title = title.trim();
+    if (author) book.author = author.trim();
+    if (price) book.price = parseFloat(price);
+    if (image) book.image = image.trim();
+    if (category) book.category = category.toLowerCase();
+    if (description !== undefined) book.description = description;
+    if (pages) {
+        book.pages = Array.isArray(pages) ? pages : pages.split(',').map(p => p.trim()).filter(p => p);
+    }
+
+    res.json({
+        success: true,
+        message: "Livro atualizado com sucesso",
+        data: book
+    });
+});
+
+// DELETE /api/livros/:id - Deletar livro
+app.delete('/api/livros/:id', (req, res) => {
+    const bookId = parseInt(req.params.id);
+    const index = books.findIndex(b => b.id === bookId);
+
+    if (index === -1) {
+        return res.status(404).json({
+            success: false,
+            message: "Livro não encontrado"
+        });
+    }
+
+    const deletedBook = books.splice(index, 1);
+
+    res.json({
+        success: true,
+        message: "Livro deletado com sucesso",
+        data: deletedBook[0]
+    });
+});
+
+// ============================================
+// 🌐 ROTAS DO SITE
+// ============================================
+
 // Rota principal - Serve o Login como página inicial
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'Login', 'Login.html'));
@@ -316,6 +413,10 @@ app.get('/loja', (req, res) => {
 
 app.get('/leitura', (req, res) => {
   res.sendFile(path.join(__dirname, 'leitura', 'Leitura.html'));
+});
+
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin', 'admin.html'));
 });
 
 // Iniciar servidor
