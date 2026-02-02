@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leitura - Livraria</title>
   <!-- Estilos do leitor de livros -->
+  <link rel="stylesheet" href="/navbar.css">
   <link rel="stylesheet" href="/leitura/leitura.css">
 </head>
 <body>
@@ -12,25 +13,25 @@
        HEADER: Navegação
        ============================ -->
   <header class="page-top">
-    <nav class="navbar">
-      <div class="container">
-        <!-- Logo e links principais -->
-        <div class="nav-left">
-          <a href="../inicial/i.html" class="brand">
-            <img src="../fotos/logo.png" alt="logo" class="brand-img" />
-          </a>
-          <ul class="nav-links">
-            <li><a href="../inicial/i.html">Início</a></li>
-            <li><a href="../loja/catalogo.html">Loja</a></li>
-            <li><a href="../biblioteca/bibliotecaindex.html">Biblioteca</a></li>
-          </ul>
-        </div>
-        <!-- Botão para tela cheia -->
-        <div class="nav-right">
-          <button class="btn-fullscreen" id="btnFullscreen" title="Tela cheia">⛶</button>
-        </div>
-      </div>
-    </nav>
+      <nav class="navbar">
+          <div class="container">
+              <div class="nav-left">
+                  <a href="/" class="brand">
+                      <img src="/fotos/logo.png" alt="Logo Biblioteca" class="brand-img" />
+                  </a>
+                  <ul class="nav-links">
+                      <li><a href="/inicial/i.html" class="nav-link">Início</a></li>
+                      <li><a href="/loja" class="nav-link">Loja</a></li>
+                      <li><a href="/biblioteca" class="nav-link">Biblioteca</a></li>
+                  </ul>
+              </div>
+              <div class="nav-right">
+                  <button class="cart-btn" id="cartBtn">
+                      🛒 Carrinho (<span id="cartCount">0</span>)
+                  </button>
+              </div>
+          </div>
+      </nav>
   </header>
 
   <!-- ============================

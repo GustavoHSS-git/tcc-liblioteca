@@ -525,11 +525,71 @@ body {
     padding: 20px;
 }
 /* ============================================
-   RESPONSIVO
+   RESPONSIVO - BREAKPOINTS COMPLETOS
    ============================================ */
+
+/* TABLET GRANDE (1024px e menores) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 30px;
+    }
+
+    .brand-img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .nav-links {
+        gap: 8px;
+    }
+
+    .nav-links a {
+        padding: 8px 16px;
+        font-size: 0.95rem;
+    }
+
+    .navbar {
+        height: 70px;
+    }
+
+    .reader-container {
+        margin-top: 70px;
+    }
+
+    .reader-toolbar {
+        padding: 12px;
+    }
+
+    .btn-nav {
+        font-size: 2.2rem;
+        padding: 12px;
+    }
+
+    .reader-nav {
+        width: 60px;
+    }
+
+    .reader-display {
+        padding: 20px;
+    }
+
+    .page-info {
+        font-size: 0.95rem;
+    }
+}
+
+/* TABLET PEQUENO / MOBILE GRANDE (768px e menores) */
 @media (max-width: 768px) {
     .container {
         padding: 0 20px;
+    }
+
+    .navbar {
+        height: 65px;
+    }
+
+    .reader-container {
+        margin-top: 65px;
     }
 
     .brand-img {
@@ -549,18 +609,20 @@ body {
     .reader-toolbar {
         padding: 10px;
         height: auto;
+        flex-wrap: wrap;
     }
 
     .toolbar-left,
     .toolbar-center,
     .toolbar-right {
-        flex-direction: column;
+        flex-direction: row;
         gap: 8px;
+        flex-wrap: wrap;
     }
 
     .btn-nav {
-        font-size: 2rem;
-        padding: 10px;
+        font-size: 1.8rem;
+        padding: 8px;
     }
 
     .reader-nav {
@@ -579,60 +641,194 @@ body {
         max-width: none;
     }
 
+    .reader-display {
+        padding: 15px;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .page-info {
+        font-size: 0.9rem;
+    }
+
     .settings-panel,
     .bookmarks-panel {
         width: 280px;
+        max-height: 70vh;
+    }
+
+    .btn-control {
+        padding: 8px 12px;
+        font-size: 0.95rem;
     }
 }
 
+/* MOBILE PEQUENO (480px e menores) */
 @media (max-width: 480px) {
     .navbar {
-        height: 65px;
+        height: 55px;
     }
 
     .reader-container {
-        margin-top: 65px;
+        margin-top: 55px;
+    }
+
+    .container {
+        padding: 0 15px;
     }
 
     .brand-img {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
     }
 
     .nav-links {
         gap: 0;
+        display: none;
+    }
+
+    .nav-links.show {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 55px;
+        left: 0;
+        right: 0;
+        background: white;
+        padding: 10px 0;
+        border-bottom: 1px solid #e0e0e0;
     }
 
     .nav-links a {
-        padding: 8px 10px;
+        padding: 10px 15px;
         font-size: 0.85rem;
+        display: block;
     }
 
-    .reader-nav {
-        width: 40px;
+    .page-top {
+        position: fixed;
+    }
+
+    .reader-toolbar {
+        padding: 8px;
+        flex-direction: column;
+        gap: 8px;
+        height: auto;
+    }
+
+    .toolbar-left,
+    .toolbar-center,
+    .toolbar-right {
+        flex-direction: row;
+        gap: 5px;
+        width: 100%;
+        justify-content: space-between;
     }
 
     .btn-nav {
         font-size: 1.5rem;
         padding: 5px;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .reader-nav {
+        width: 40px;
+        padding: 5px 0;
     }
 
     .reader-display {
-        padding: 15px;
+        padding: 12px;
+        font-size: 0.95rem;
+        line-height: 1.5;
     }
 
     .page-info {
         font-size: 0.8rem;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .reader-controls {
+        flex-direction: column;
+        height: auto;
+        gap: 8px;
+        padding: 8px;
+    }
+
+    .controls-center {
+        width: 100%;
+        flex-wrap: wrap;
     }
 
     .btn-control {
         padding: 6px 10px;
-        font-size: 1rem;
+        font-size: 0.9rem;
+        flex: 1;
+        min-width: 60px;
     }
 
     .settings-panel,
     .bookmarks-panel {
-        width: 250px;
+        width: 100%;
+        max-width: 100%;
+        max-height: 60vh;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 12px 12px 0 0;
+    }
+
+    /* Hamburger menu simples */
+    .hamburger {
+        display: block;
+        width: 30px;
+        height: 24px;
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: #333;
+        margin: 5px 0;
+        transition: all 0.3s;
+    }
+}
+
+/* EXTRA PEQUENO (Abaixo de 360px) */
+@media (max-width: 360px) {
+    .navbar {
+        height: 50px;
+    }
+
+    .reader-container {
+        margin-top: 50px;
+    }
+
+    .brand-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .reader-display {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .btn-nav {
+        font-size: 1.3rem;
+        padding: 4px;
+    }
+
+    .btn-control {
+        padding: 5px 8px;
+        font-size: 0.85rem;
     }
 } 
 

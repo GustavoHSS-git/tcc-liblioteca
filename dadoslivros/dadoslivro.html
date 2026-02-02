@@ -4,24 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livraria</title>
+    <link rel="stylesheet" href="/navbar.css">
     <link rel="stylesheet" href="/dadoslivros/dadoslivro.css">
 </head>
 <body>
     <!-- TOPO -->
     <header class="page-top">
-        <div class="top-strip"></div>
         <nav class="navbar">
             <div class="container">
                 <div class="nav-left">
-                    <a href="#" class="brand">
-                        <img src="/fotos/logo.png" alt="Logo da Livraria" class="brand-img"> 
+                    <a href="/" class="brand">
+                        <img src="/fotos/logo.png" alt="Logo Biblioteca" class="brand-img"> 
                     </a>
                     <ul class="nav-links">
-                        <li><a href="/inicial/i.html">Início</a></li>
-                        <li><a href="/loja/lojaindex.html">Loja</a></li>
-                        <li><a href="/biblioteca/bibliotecaindex.html">Biblioteca</a></li>
-                        <li><a href="#">Dinheiro</a></li>
+                        <li><a href="/inicial/i.html" class="nav-link">Início</a></li>
+                        <li><a href="/loja" class="nav-link">Loja</a></li>
+                        <li><a href="/biblioteca" class="nav-link">Biblioteca</a></li>
                     </ul>
+                </div>
+                <div class="nav-right">
+                    <button class="cart-btn" id="cartBtn">
+                        🛒 Carrinho (<span id="cartCount">0</span>)
+                    </button>
                 </div>
             </div>
         </nav>

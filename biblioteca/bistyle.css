@@ -4,56 +4,32 @@ body {
     font-family: 'Inter', 'Nunito Sans', sans-serif;
     margin: 0;
     padding: 0;
-    padding-top: 79px; 
+    padding-top: 65px; 
     background-color: #007385;
+    min-height: 100vh;
 } 
 
-/* Top bar + navbar (igual à imagem) */
-.page-top { position: fixed; top: 0; left: 0; width: 100%; z-index:1100; }
-.top-strip {   width: 100%; }
-.navbar {
-  background: white;
-  border-bottom: 1px solid #EFEFEF;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  height: 75px;
-  display: block;
-/* layout interno controlado pela .container */
-}
-
-/* centraliza o conteúdo da header como na imagem */
-.container {
-  max-width: 122220px;
-  margin: 0 auto;
-  padding: 0 50px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-
-.nav-left { display: flex; align-items: center; gap: 40px; } 
-.brand-img { width: 85px; height: 85px; object-fit: contain; display:block; }
-
-.nav-links { list-style: none; display: flex; gap: 0; align-items: center; height: 100%; } 
-.nav-links li { font-size: 16px; margin-right: 2px; } 
-.nav-links a { color: #222; text-decoration: none; padding: 8px 20px; border-radius: 6px; height: 100%; display: flex; align-items: center; transition: all 0.3s ease; }
-.nav-links a:hover { background: rgba(0, 115, 133, 0.1); color: #007385; }
 
 /* ------------------- PESQUISA ------------------- */
 
 .search-area {
     text-align: center;
-    margin-top: 20px; /* abaixo da navbar */
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .search-area input {
-   width: 350px;
+    width: 350px;
     padding: 12px 18px;
     border-radius: 25px;
     border: none;
     outline: none;
     font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.search-area input:focus {
+    box-shadow: 0 0 8px rgba(240, 234, 62, 0.5);
 }
 
 
@@ -64,7 +40,7 @@ body {
 /* Grade automática de cards: colunas fixas (responsivas) */
 .d-steam-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 280px)); /* colunas fixas de 180px que se quebram automaticamente */
+  grid-template-columns: repeat(auto-fill, minmax(230px, 230px)); /* colunas fixas de 180px que se quebram automaticamente */
   justify-content: center; /* centraliza o bloco d  e grid na página */
   gap: 2rem; /* espaço entre cards */
   padding: 1rem; /* evita cortes nas bordas */
@@ -83,6 +59,156 @@ body {
 
 @media only screen and (max-width: 768px) {
   .d-steam-cards { grid-template-columns: repeat(auto-fill, minmax(120px, 120px)); }
+}
+
+/* ============================================
+   RESPONSIVO - BREAKPOINTS COMPLETOS
+   ============================================ */
+
+/* TABLET GRANDE (1024px e menores) */
+@media only screen and (max-width: 1024px) {
+  body {
+    padding-top: 60px;
+  }
+
+  .search-area {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .search-area input {
+    width: 300px;
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
+  .d-steam-cards {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+
+  .d-steam-card {
+    padding: 0 0 150% 0;
+  }
+}
+
+/* TABLET PEQUENO / MOBILE GRANDE (768px e menores) */
+@media only screen and (max-width: 768px) {
+  body {
+    padding-top: 55px;
+  }
+
+  .search-area {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding: 0 15px;
+  }
+
+  .search-area input {
+    width: 100%;
+    max-width: 300px;
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+  .d-steam-cards {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 140px));
+    gap: 1rem;
+    padding: 0.75rem;
+  }
+
+  .d-steam-card {
+    padding: 0 0 150% 0;
+  }
+
+  .d-steam-card:hover,
+  .d-steam-card:focus {
+    transform: perspective(222px) translate3d(0px, 0px, 4px) rotateX(2deg);
+  }
+}
+
+/* MOBILE PEQUENO (480px e menores) */
+@media only screen and (max-width: 480px) {
+  body {
+    padding-top: 50px;
+  }
+
+  .search-area {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+  }
+
+  .search-area input {
+    width: 100%;
+    max-width: 280px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .d-steam-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    padding: 0.5rem;
+  }
+
+  .d-steam-card {
+    padding: 0 0 150% 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  }
+
+  .d-steam-card:hover,
+  .d-steam-card:focus {
+    transform: perspective(222px) translate3d(0px, 0px, 2px) rotateX(1deg);
+    box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.5);
+  }
+
+  .b-game-card {
+    perspective: 500px;
+  }
+
+  .b-game-card:hover .b-game-card__cover {
+    transform: rotateX(5deg) translateY(-4px);
+  }
+}
+
+/* EXTRA PEQUENO (Abaixo de 360px) */
+@media only screen and (max-width: 360px) {
+  body {
+    padding-top: 45px;
+  }
+
+  .search-area {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 0 8px;
+  }
+
+  .search-area input {
+    width: 100%;
+    max-width: 100%;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  .d-steam-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .d-steam-card {
+    padding: 0 0 150% 0;
+  }
+
+  .d-steam-card::before {
+    opacity: 0.3;
+  }
+
+  .d-steam-card:hover::before {
+    opacity: 0.6;
+  }
 }
 
 .d-steam-card {

@@ -119,7 +119,7 @@ const books = [
         title: "Câmara Secreta",
         author: "J.K. Rowling",
         price: 85.00,
-        image: "../fotos/32.jpg",
+        image: "../fotos/22.jpg",
         images: ["../fotos/32.jpg"],
         description: "O segundo livro da saga Harry Potter. Mistérios e perigos rondam Hogwarts.",
         category: "livro"

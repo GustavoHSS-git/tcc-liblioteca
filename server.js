@@ -109,8 +109,8 @@ const books = [
         title: "Dragon Ball Super Vol. 3",
         author: "Akira Toriyama",
         price: 49.90,
-        image: "/fotos/dbz3.jpg",
-        images: ["/fotos/dbz3.jpg",],
+        image: "/fotos/paginas/dbz3.jpg",
+        images: ["/fotos/paginas/dbz3.jpg", "/fotos/paginas/3 (6).jpg"],
         description: "Continuação da série com novos desafios intergalácticos e batalhas épicas.",
         category: "manga"
     },
@@ -119,7 +119,7 @@ const books = [
         title: "Câmara Secreta",
         author: "J.K. Rowling",
         price: 85.00,
-        image: "/fotos/32.jpg",
+        image: "/fotos/37.jpg",
         images: ["/fotos/32.jpg"],
         description: "O segundo livro da saga Harry Potter. Mistérios e perigos rondam Hogwarts.",
         category: "livro"

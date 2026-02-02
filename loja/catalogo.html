@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo - Livraria</title>
     <!-- Link para os estilos CSS -->
+    <!-- <link rel="stylesheet" href="/navbar.css"> -->
     <link rel="stylesheet" href="/loja/catalogo.css">
 </head>
 <body>
@@ -12,23 +13,19 @@
          HEADER: Navegação e Logo
          ============================ -->
     <header class="page-top">
-        <div class="top-strip"></div>
         <nav class="navbar">
             <div class="container">
                 <div class="nav-left">
-                    <!-- Logo da livraria -->
-                    <a href="#" class="brand">
-                        <img src="../fotos/logo.png" alt="logo" class="brand-img" />
+                    <a href="/" class="brand">
+                        <img src="/fotos/logo.png" alt="Logo Biblioteca" class="brand-img" />
                     </a>
-                    <!-- Links de navegação (Início, Loja, Biblioteca) -->
                     <ul class="nav-links">
-                        <li><a href="../inicial/i.html">Início</a></li>
-                        <li><a href="catalogo.html" class="active">Loja</a></li>
-                        <li><a href="../biblioteca/bibliotecaindex.html">Biblioteca</a></li>
+                        <li><a href="/inicial/i.html" class="nav-link">Início</a></li>
+                        <li><a href="/loja" class="nav-link">Loja</a></li>
+                        <li><a href="/biblioteca" class="nav-link">Biblioteca</a></li>
                     </ul>
                 </div>
                 <div class="nav-right">
-                    <!-- Botão carrinho com contador dinâmico -->
                     <button class="cart-btn" id="cartBtn">
                         🛒 Carrinho (<span id="cartCount">0</span>)
                     </button>
