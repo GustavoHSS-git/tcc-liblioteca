@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Livro - Biblioteca Digital</title>
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/dadoslivros/dadoslivro.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <header class="page-top">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-left">
+                    <a href="/" class="brand">
+                        <img src="/fotos/logo.png" alt="Logo Biblioteca" class="brand-img"> 
+                    </a>
+                    <ul class="nav-links">
+                        <li><a href="/inicial/i.html" class="nav-link">Início</a></li>
+                        <li><a href="/loja" class="nav-link">Loja</a></li>
+                        <li><a href="/biblioteca" class="nav-link">Biblioteca</a></li>
+                    </ul>
+                </div>
+                <div class="nav-right">
+                    <button class="cart-btn" id="cartBtn">
+                        🛒 Carrinho (<span id="cartCount">0</span>)
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="book-details-page">
+        <div class="book-details-container">
+            <!-- COLUNA 1: CAPA -->
+            <div class="book-cover-section">
+                <div class="book-cover">
+                    <img src="/fotos/paginas/dbz1.jpg" alt="Capa do livro Dragon Ball Super Vol. 1">
+                </div>
+            </div>
+
+            <!-- COLUNA 2: INFORMAÇÕES -->
+            <div class="book-info-section">
+                <h1 class="book-title">Dragon Ball Super - Vol. 1</h1>
+                
+                <div class="book-meta">
+                    <span class="author">por <strong>Akira Toriyama</strong></span>
+                    <span class="category">Mangá</span>
+                </div>
+
+                <!-- AVALIAÇÃO -->
+                <div class="rating-section">
+                    <div class="stars-display">
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star filled">★</span>
+                        <span class="star half">★</span>
+                    </div>
+                    <span class="rating-text">4,5 de 5 (3.566 avaliações)</span>
+                </div>
+
+                <!-- DESCRIÇÃO -->
+                <p class="book-description">
+                    Alguns meses se passaram desde a grande luta entre Goku e Majin Boo. 
+                    Mas uma nova ameaça vem para acabar com a paz. Parece que o próximo inimigo 
+                    vem do Sexto Universo e nossos heróis mal podem esperar para enfrentá-lo e testar sua força. 
+                    A aclamada série de Akira Toriyama finalmente tem a sua continuação.
+                </p>
+
+                <!-- AVALIAÇÃO DO USUÁRIO -->
+                <div class="user-rating-section">
+                    <h3>Sua Avaliação</h3>
+                    <div class="rating-stars">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <p id="rating-result">Clique nas estrelas para avaliar</p>
+                </div>
+            </div>
+
+            <!-- COLUNA 3: COMPRA -->
+            <div class="book-purchase-section">
+                <div class="price-box">
+                    <p class="price-label">Preço</p>
+                    <p class="price-amount">R$ 49,90</p>
+                </div>
+
+                <button class="btn-buy">Comprar Agora</button>
+                <button class="btn-read">Ler Amostra</button>
+
+                <div class="book-details-box">
+                    <h4>Informações</h4>
+                    <ul class="details-list">
+                        <li><strong>Autor:</strong> Akira Toriyama</li>
+                        <li><strong>Editora:</strong> Panini</li>
+                        <li><strong>Gênero:</strong> Mangá</li>
+                        <li><strong>Páginas:</strong> 200+</li>
+                        <li><strong>ISBN:</strong> 978-8532531234</li>
+                    </ul>
+                </div>
+
+                <div class="author-bio-box">
+                    <h4>Sobre o Autor</h4>
+                    <p>Akira Toriyama é um renomado mangaká japonês, mundialmente conhecido por criar Dragon Ball e Dr. Slump, duas das obras mais influentes da história dos mangás.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RELACIONADOS -->
+        <div class="related-books-section">
+            <h2>Livros Relacionados</h2>
+            <div class="related-books-grid">
+                <div class="related-book-card">
+                    <img src="/fotos/paginas/dbz2.jpg" alt="">
+                    <h4>Jujutsu Kaisen</h4>
+                    <p class="author-small">Gege Akutami</p>
+                    <span class="price-small">R$ 35,00</span>
+                </div>
+                <div class="related-book-card">
+                    <img src="/fotos/paginas/dbz3.jpg" alt="Dragon Ball Super Vol. 3">
+                    <h4>Dragon Ball Super Vol. 3</h4>
+                    <p class="author-small">Akira Toriyama</p>
+                    <span class="price-small">R$ 49,90</span>
+                </div>
+                <div class="related-book-card">
+                    <img src="/fotos/paginas/dbz4.jpg" alt="Dragon Ball Super Vol. 4">
+                    <h4>Dragon Ball Super Vol. 4</h4>
+                    <p class="author-small">Akira Toriyama</p>
+                    <span class="price-small">R$ 49,90</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/dadoslivros/dadoslivro.js"></script>
+    
+    <script>
+        const stars = document.querySelectorAll('.rating-stars .star');
+        const result = document.getElementById('rating-result');
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = star.getAttribute('data-value');
+
+                stars.forEach(s => s.classList.remove('selected'));
+                for (let i = 0; i < value; i++) {
+                    stars[i].classList.add('selected');
+                }
+
+                result.textContent = `Você avaliou com ${value} estrela${value > 1 ? 's' : ''}!`;
+            });
+        });
+    </script>
+</body>
+</html>
